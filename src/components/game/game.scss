@@ -1,0 +1,24 @@
+.game {
+	display: grid;
+	width: 100%;
+	height: 100%;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
+	background-image: url('../../assets/back.png');
+	background-size: contain;
+
+	&__cell {
+		width: 100%;
+		height: 100%;
+	}
+
+	&__cell_x {
+		background-image: url('../../assets/x.png');
+		background-size: contain;
+	}
+
+	&__cell_o {
+		background-image: url('../../assets/o.png');
+		background-size: contain;
+	}
+}
