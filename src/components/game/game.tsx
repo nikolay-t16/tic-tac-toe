@@ -2,6 +2,7 @@ import React from "react";
 import "./game.scss";
 
 import GameCell from "../gameCell/gameCell";
+import Model from "../../model/Model";
 
 type GameState = {
 	height: number,
@@ -50,18 +51,26 @@ class Game extends React.Component {
 		return width;
 	}
 
-	onCellClick(cellNumber: number) {
-		if(this.state.cells[cellNumber]) {
+	async onCellClick(cellNumber: number) {
+		if (this.state.cells[cellNumber]) {
 			return;
 		}
 		const newCells = [...this.state.cells];
 		newCells[cellNumber] = GameCell.SYMBOL_CROSS;
-		this.setState({cells: newCells});
-		console.log('onCellClick');
+		await this.setState({cells: newCells});
+		await this.makeComputerMove();
 	}
 
+	protected async makeComputerMove() {
+		const moveForComputer = Model.getMoveForComputer(this.state.cells);
+		const newCells = [...this.state.cells];
+		newCells[moveForComputer] = GameCell.SYMBOL_ZERO;
+		await this.setState({cells: newCells});
+	}
+
+
 	render() {
-		const cells:{}[] = [];
+		const cells: {}[] = [];
 		this.state.cells.forEach((e, i) => cells.push(
 			<div
 				className="game__cell"
