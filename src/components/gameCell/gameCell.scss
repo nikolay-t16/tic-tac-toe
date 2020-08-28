@@ -1,0 +1,10 @@
+.game-cell {
+	margin: 2%;
+	width: 96%;
+	height: 96%;
+	cursor: pointer;
+
+	&__icon {
+		width: 100%;
+	}
+}
