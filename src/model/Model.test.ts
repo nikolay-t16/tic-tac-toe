@@ -159,3 +159,39 @@ test('Model: checking liner winner', () => {
 		});
 	});
 });
+
+test('Model: checking diagonal winner', () => {
+	const testWinCells = [
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+	];
+	const testNotWinCells = [
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_ZERO,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+		Model.SYMBOL_CROSS,
+	];
+
+	[true, false].forEach((isPlayer) => {
+		[0, 2].forEach((cellNum) => {
+			const checkWinResult = ModelTest.checkDiagonalWinner(cellNum, testWinCells, () => true);
+			expect(checkWinResult).toEqual(true);
+
+			const checkNotWinResult = ModelTest.checkDiagonalWinner(cellNum, testNotWinCells, () => true);
+			expect(checkNotWinResult).toEqual(false);
+		});
+	});
+});
+
